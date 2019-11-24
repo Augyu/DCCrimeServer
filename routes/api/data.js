@@ -23,4 +23,10 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+router.get('/:startTime/:endTime/:location/:crimeType', async function(req, res){
+  res.send(req.params)
+})
+// export const findEvent = (start, end ,location , type) => {
+//   const result = await client.query('')
+// }
 module.exports = router;
