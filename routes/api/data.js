@@ -6,7 +6,7 @@ require('dotenv').config();
 
 /* postgresql connection */
 const { Client } = require('pg')
-const connectionString = process.env.HEROKU_POSTGRESQL_URL
+const connectionString = process.env.HEROKU_POSTGRESQL_PINK_URL
 const client = new Client({
   connectionString: connectionString,
   ssl: true
