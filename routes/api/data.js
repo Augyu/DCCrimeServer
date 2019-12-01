@@ -6,7 +6,7 @@ require('dotenv').config();
 
 /* postgresql connection */
 const { Client } = require('pg')
-const connectionString = process.env.DATABASE_URL
+const connectionString = process.env.HEROKU_POSTGRESQL_URL
 const client = new Client({
   connectionString: connectionString,
   ssl: true
@@ -15,7 +15,7 @@ client.connect()
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   try {
-    const result = await client.query('SELECT x, y, report_dat, tweet_text, dcrealcrime.offense, is_twitter FROM dcrealcrime LEFT JOIN twitterdata ON dcrealcrime.octo_record_id2 =  twitterdata.octo_record_id')
+    const result = await client.query('SELECT x, y, report_dat, tweet_text, dcrealcrime.gioffense, is_twitter FROM dcrealcrime LEFT JOIN twitterdata ON dcrealcrime.octo_record_id2 =  twitterdata.octo_record_id')
     res.json(result.rows)
     //client.end()
   } catch (err) {
