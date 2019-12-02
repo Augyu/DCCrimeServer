@@ -14,7 +14,7 @@ client.connect()
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   try {
-    const result = await client.query('SELECT octo_record_id_key, latitude, longitude, report_date, offense, is_twitter FROM dcrealcrime')
+    const result = await client.query('SELECT octo_record_id_key, latitude, longitude, report_date, offense, is_twitter FROM dcrealcrime LIMIT 10000')
     res.json(result.rows)
     //client.end()
   } catch (err) {
