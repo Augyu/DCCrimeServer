@@ -14,7 +14,7 @@ client.connect()
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   try {
-    const result = await client.query('SELECT octo_record_id_key, latitude, longitude, report_date, offense, is_twitter FROM dcrealcrime LIMIT 100')
+    const result = await client.query('SELECT octo_record_id_key, latitude, longitude, report_date, offense, is_twitter FROM dcrealcrime LIMIT 300')
     res.json(result.rows)
     //client.end()
   } catch (err) {
@@ -24,17 +24,18 @@ router.get('/', async function(req, res, next) {
 
 router.get('/:id', async function(req, res) {
   try {
-    const result = await client.query('SELECT tweet_date, tweet_text FROM twitterdata WHERE octo_record_id = $1::text',[req.params.id])
-    //res.send(req.params.id)
+    const result = await client.query('SELECT tweet_date, tweet_text, octo_record_id FROM twitterdata WHERE octo_record_id = $1::text',[req.params.id])
+    // res.send(req.params.id)
     res.json(result.rows)
   } catch (err) {
     console.log(err.stack)
   }
+  
 });
 
-router.get('/:startTime/:endTime/:location/:crimeType', async function(req, res){
-  res.send(req.params)
-})
+// router.get('/:startTime/:endTime/:location/:crimeType', async function(req, res){
+//   res.send(req.params)
+// })
 // location to lat and long
 const reverseGeocode = (location) => {
   axios
